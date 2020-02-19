@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/item_collection'
+require 'pry'
 
 class ItemCollectionTest < Minitest::Test
   def setup
@@ -34,5 +35,9 @@ class ItemCollectionTest < Minitest::Test
     second_merchant_item = @item_collection.items.first
     third_merchant_item = @item_collection.items[1]
     assert_equal [second_merchant_item, third_merchant_item, @item], @item_collection.where(12334185)
+  end
+
+  def test_it_can_calculate_average_item_price
+    assert_equal 1012.5, @item_collection.average_item_price
   end
 end

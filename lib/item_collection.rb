@@ -16,14 +16,6 @@ class ItemCollection
     end
   end
 
-  # def items
-  #     csv = CSV.read("#{csv_file_path}", headers: true, header_converters: :symbol)
-  #
-  #     csv.map do |row|
-  #        Item.new(row)
-  #     end
-  # end
-
   def find(id)
     @items.find do |item|
       item.id == id
@@ -35,13 +27,12 @@ class ItemCollection
       item.merchant_id == merchant_id
     end
   end
-end
 
-  # def where(attribute)
-  #   attribute_name = attribute.keys.first
-  #   attribute_value = attribute.values.last
-  # 
-  #   all_items.find_all do |item|
-  #     item.send(attribute_name) == attribute_value
-  #   end
-  # end
+  def average_item_price
+    sum_prices = @items.sum do |item|
+      item.unit_price
+    end
+
+    sum_prices.to_f / @items.length
+  end
+end
